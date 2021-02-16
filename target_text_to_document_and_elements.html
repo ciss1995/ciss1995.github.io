@@ -4,12 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark light" />
-    <title>Target Text to Document</title>
+    <title>Target Text to Elements</title>
     <style>
       body {
         font-family: system-ui, sans-serif;
       }
       ::target-text {
+          background-color: green;
+      }
+      p::target-text {
+        background-color: aqua;
+      }
+      h1::target-text {
         background-color: pink;
       }
     </style>
@@ -17,6 +23,7 @@
   <body>
     <div>
       <h1>Open Source Text</h1>
+      <h2>Open Source Second Text</h1>
       <p>
         This textbook has more freedom than most (but see some exceptions). 
         First, there is no cost to acquire this text, and you are under no 
@@ -26,7 +33,8 @@
         You may modify copies of the book for your own use - for example, 
         you may wish to change to a prefered notation for certain objects or add a few new sections. 
         There is a copyright on the book, and subsequently it is licensed with a 
-        GNU Free Documentation License (GFDL). It is this combination that allows the author 
+        GNU Free Documentation License (GFDL). 
+        It is this combination that allows the author 
         to give you greater freedoms in how you use the text, thus liberating it from some 
         of the antiquated notions of copyright that apply to books in physical form. The main caveat 
         is that if you make modifications and then distribute a modified version, you are required 

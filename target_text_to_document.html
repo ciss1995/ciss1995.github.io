@@ -18,25 +18,59 @@
         console.log("Capture click");
         document.getElementById("firstTitle").focus();
       });
+
+      addEventListener('load', () => {
+        if (!document.fragmentDirective) {
+          console.log("Fragment Directive Unsupported");
+          return;
+        }
+
+        // Extract fragment directive. Use the performance API since it's
+        // stripped from the Document's URL.
+        if (performance.getEntriesByType("navigation")[0].name == "") {
+          console.log("No URL in performance API - locally hosted?");
+          return;
+        }
+
+        const url = new URL(performance.getEntriesByType("navigation")[0].name);
+        const delimiter_ix = url.hash.indexOf(':~:');
+        if (delimiter_ix == -1)
+          return;
+
+        const frag_directive = url.hash.substr(delimiter_ix + 3);
+        const directives = frag_directive.split('&');
+        const text_directives = [];
+        for (directive of directives) {
+          if (directive.startsWith('text='))
+            text_directives.push(directive);
+        }
+
+        if (text_directives.length <= 0)
+          return;
+
+        let method = 'locationReplace';
+
+        const message = {
+          "directive": text_directives.join('&'),
+        };
+
+        console.log(`Sending: ${message.directive}`);
+        frames[0].postMessage(message, "*");
+      });
     </script>
   </head>
   <body>
     <div>
       <h1 id="firstTitle">Open Source Textss</h1>
       <p>
-        This textbook has more freedom than most (but see some exceptions). 
-        First, there is no cost to acquire this text, and you are under no 
-        obligation whatsoever to compensate or donate to the author or publisher. 
-        So in this most basic sense, it is a free textbook. Therefore you can also 
-        make as many copies as you like, ensuring that the book will never go out-of-print. 
-        You may modify copies of the book for your own use - for example, 
-        you may wish to change to a prefered notation for certain objects or add a few new sections. 
-        There is a copyright on the book, and subsequently it is licensed with a 
-        GNU Free Documentation License (GFDL). It is this combination that allows the author 
-        to give you greater freedoms in how you use the text, thus liberating it from some 
-        of the antiquated notions of copyright that apply to books in physical form. The main caveat 
-        is that if you make modifications and then distribute a modified version, you are required 
-        to again apply the GFDL license to the result so that others may benefit from your modifications.
+        There are many variations of passages of Lorem Ipsum available, 
+        but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. 
+        If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. 
+        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, 
+        making this the first true generator on the Internet. 
+        It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, 
+        to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, 
+        or non-characteristic words etc.
       </p>
       <iframe src="https://ciss1995.github.io/default.html"></iframe>
     </div>

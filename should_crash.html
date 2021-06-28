@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .content {
+      width: 1000px;
+      height: 2000px;
+      background-color: silver;
+    }
+  </style>
+  <script>
+    // Dirty lifecycle inside the click event.
+    addEventListener('click', () => {
+      document.body.style.width = '50px';
+    });
+    // This prevents calling HandleMouseReleaseEvent which has an
+    // UpdateLifecycle call inside it.
+    addEventListener('mouseup', (e) => { e.preventDefault(); });
+  </script>
+</head>
+
+<body>
+  This is just example text that will wrap when the body width is changed and so layout gets dirtied.
+  <div class="content"></div>
+</body>
+</html>

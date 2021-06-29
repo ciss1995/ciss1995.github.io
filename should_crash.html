@@ -10,7 +10,8 @@
   </style>
   <script>
     // Dirty lifecycle inside the click event.
-    addEventListener('click', () => {
+    addEventListener('contextmenu', () => {
+      console.log('eventListener on contextmenu');
       document.body.style.width = '50px';
     });
     // This prevents calling HandleMouseReleaseEvent which has an

@@ -10,7 +10,7 @@
   </style>
   <script>
     // Dirty lifecycle inside the click event.
-    addEventListener('contextmenu', () => {
+    addEventListener('click', () => {
       console.log('eventListener on contextmenu');
       document.body.style.width = '50px';
     });

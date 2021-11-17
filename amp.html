@@ -52,6 +52,7 @@
 
         console.log(`Sending: ${message.directive}`);
         frames[0].postMessage(message, "*");
+        frames[1].postMessage(message, "*");
       });
 
     </script>
